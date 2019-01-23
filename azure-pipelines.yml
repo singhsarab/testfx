@@ -29,10 +29,9 @@ jobs:
       arguments: '-configuration $(BuildConfiguration) -all -parallel'
       modifyEnvironment: false
 
-  - task: PublishTestResults@1
-    displayName: 'Publish Test Results **/*.trx'
+  - task: PublishTestResults@2
+    displayName: 'Publish Test Results **\*.trx'
     inputs:
-      testRunner: VSTest
-      testResultsFiles: '**/*.trx'
-      testRunTitle: 'All Tests'
-    continueOnError: true
+      testResultsFormat: VSTest
+      testResultsFiles: '**\*.trx'
+    condition: succeededOrFailed()
